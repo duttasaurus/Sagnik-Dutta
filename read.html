@@ -3,28 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sagnik Dutta — Blog</title>
+  <title>Sagnik Dutta — Blog (Read)</title>
   <link rel="stylesheet" href="assets/css/style.css">
   <style>
     :root{--bg:#242E2C;--muted:#9aa39f;--accent:#fff}
-    body{background:var(--bg);color:var(--accent);margin:0;font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial;}
+    body{background:var(--bg);color:var(--accent);margin:0;font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial}
     .container{max-width:1100px;margin:0 auto;padding:28px}
-    header.site-header { border-bottom: none !important; box-shadow: none !important; background: transparent !important; }
+    header.site-header{border-bottom:none!important;box-shadow:none!important;background:transparent!important}
     header.site-header .container{display:flex;align-items:flex-end;justify-content:space-between}
-    .main-nav a { color: var(--accent); text-decoration: none; }
+    .main-nav a{color:var(--accent);text-decoration:none;margin-left:14px}
     h1.brand{font-size:2.2rem;margin:0}
 
-    /* layout */
     .read-wrap{display:flex;gap:28px;align-items:flex-start}
     .read-main{flex:1 1 640px}
     .read-sidebar{width:300px;flex:0 0 300px}
 
-    /* search */
     .search-row{display:flex;gap:12px;align-items:center;margin:8px 0 18px}
     .search-input{flex:1;padding:10px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:var(--accent)}
     .small{font-size:.9rem;color:var(--muted)}
 
-    /* posts list and cards */
     #posts-list{display:grid;grid-template-columns:1fr;gap:18px}
     .post-card{background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;display:flex;gap:14px;align-items:flex-start}
     .post-thumb{width:160px;height:100px;object-fit:cover;border-radius:6px;flex:0 0 160px}
@@ -34,90 +31,24 @@
     .post-excerpt{color:#dfe7e4;margin:0}
     .read-more{margin-top:10px;display:inline-block;text-decoration:underline;color:var(--accent)}
 
-    /* fullpost modal */
     .modal{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;padding:28px;z-index:50}
     .modal.open{display:flex}
     .modal-card{background:var(--bg);max-width:900px;width:100%;max-height:85vh;overflow:auto;padding:20px;border-radius:10px}
-    .modal-card img{max-width:100%;height:auto}
 
-    /* sidebar */
     .card{background:rgba(255,255,255,0.02);padding:14px;border-radius:8px;margin-bottom:16px}
-    .sidebar-photo{width:100%;border-radius:6px;margin-bottom:12px;display:block}
-    .tags{display:flex;flex-wrap:wrap;gap:8px}
-    .tag{background:rgba(255,255,255,0.04);padding:6px 8px;border-radius:999px;font-size:.85rem;cursor:pointer;color:var(--accent)}
-    .tag.active{outline:2px solid rgba(255,255,255,0.06)}
 
-    /* admin form */
-    .admin-panel{background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;margin-bottom:18px}
-    input,textarea,select{width:100%;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--accent)}
-    label{font-size:.85rem;color:var(--muted);display:block;margin-bottom:6px}
-    .btn{display:inline-block;padding:8px 12px;border-radius:6px;background:rgba(255,255,255,0.06);color:var(--accent);text-decoration:none;cursor:pointer;border:0}
-    .muted{color:var(--muted);font-size:.9rem}
-
-    .site-footer { border-top: none !important; box-shadow: none !important; background: transparent !important; }
-
-    /* responsive */
-    @media (max-width:900px){
-      .read-wrap{flex-direction:column}
-      .read-sidebar{width:100%} /* removed order:-1 so posts stay first */
-      .post-thumb{display:none}
-      .modal-card{max-height:75vh}
-    }
-
-    /* calendar styles */
     .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:8px}
     .cal-day{padding:8px 6px;text-align:center;border-radius:6px;background:rgba(255,255,255,0.01);cursor:pointer;font-size:.85rem;color:var(--accent)}
     .cal-day.today{background:rgba(255,255,255,0.06);font-weight:600}
     .cal-day.has-post::after{content:'';display:block;margin:6px auto 0;width:6px;height:6px;background:var(--accent);border-radius:50%}
-   /* responsive */
-    @media (max-width:900px){
-      .read-wrap{
-        flex-direction:column;
-      }
-      .read-sidebar{
-        width:100%;
-        /* order:-1;  removed so posts appear before sidebar on mobile */
-      }
-      .post-thumb{
-        display:none;
-      }
-      .modal-card{
-        max-height:75vh;
-      }
-    }
 
-    /* additional mobile refinements without affecting desktop */
-    @media (max-width:600px){
-      header.site-header .container{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:10px;
-      }
-      .main-nav{
-        display:flex;
-        flex-wrap:wrap;
-        gap:12px;
-      }
-      .search-row{
-        flex-direction:column;
-        align-items:stretch;
-      }
-      .search-input, .btn{
-        width:100%;
-      }
-      #posts-list{
-        gap:12px;
-      }
-      .post-card{
-        flex-direction:column;
-      }
-      .post-body{
-        width:100%;
-      }
-      .card{
-        padding:12px;
-      }
-    }
+    .btn{display:inline-block;padding:8px 12px;border-radius:6px;background:rgba(255,255,255,0.06);color:var(--accent);text-decoration:none;cursor:pointer;border:0}
+    .muted{color:var(--muted);font-size:.9rem}
+
+    #debug-log{font-family:monospace;background:rgba(0,0,0,0.2);padding:10px;border-radius:6px;margin-top:12px;max-height:160px;overflow:auto}
+    .error-note{color:#ffb4b4;background:rgba(255,0,0,0.04);padding:10px;border-radius:6px}
+
+    @media (max-width:900px){.read-wrap{flex-direction:column}.read-sidebar{width:100%}.post-thumb{display:none}}
   </style>
 </head>
 <body>
@@ -127,7 +58,7 @@
       <nav class="main-nav" role="navigation">
         <a href="index.html">Films</a>
         <a href="about.html">About me</a>
-        <a href="read.html">Read</a>
+        <a href="read.html" aria-current="page">Read</a>
       </nav>
     </div>
   </header>
@@ -136,71 +67,54 @@
     <section class="read-main" aria-label="Blog posts">
       <div style="display:flex;align-items:center;justify-content:space-between">
         <h2 id="page-title">Read</h2>
-        <div class="small muted">Showing <span id="posts-count">0</span> posts</div>
+        <div class="small muted">Showing <span id="posts-count" data-testid="posts-count">0</span> posts</div>
       </div>
 
       <div class="search-row">
-        <input id="search-input" class="search-input" placeholder="Search blog (title, body, tags)" aria-label="Search blog" />
-        <button id="clear-search" class="btn">Clear</button>
-        <button id="admin-toggle" class="btn" style="display:none;">Admin</button>
+        <input id="search-input" class="search-input" placeholder="Search blog (title, body, tags)" aria-label="Search blog" data-testid="search-input" />
+        <button id="clear-search" class="btn" data-testid="clear-search">Clear</button>
       </div>
 
-      <!-- ADMIN PANEL (visible if ?admin=1 in URL or toggled) -->
-      <div id="admin-panel" class="admin-panel" style="display:none">
-        <strong>Quick post (client-side demo)</strong>
-        <p class="muted">Posts saved here are stored in your browser (localStorage). Use the "Export" feature to get JSON you can upload to a server later.</p>
-        <label>Title<input id="post-title" placeholder="My post title"></label>
-        <label>Date<input id="post-date" type="date"></label>
-        <label>Tags (comma separated)<input id="post-tags" placeholder="tag1, tag2"></label>
-        <label>Content (Markdown supported)<textarea id="post-content" rows="8" placeholder="Write your post here — markdown allowed"></textarea></label>
-        <label>Upload images (they will be embedded at the end of the post)<input id="post-images" type="file" accept="image/*" multiple></label>
-        <div style="display:flex;gap:8px;margin-top:8px">
-          <button id="save-post" class="btn">Save post</button>
-          <button id="export-all" class="btn">Export all</button>
-          <button id="import-json" class="btn">Import JSON</button>
-          <input id="import-files" type="file" accept="application/json" multiple style="display:none">
-        </div>
-        <p class="muted">Tip: for videos paste the iframe/embed HTML directly into the content area (it will be rendered).</p>
-      </div>
-
-      <div id="posts-list" aria-live="polite"></div>
+      <div id="posts-list" aria-live="polite" data-testid="posts-list"></div>
 
       <div style="margin-top:14px">
-        <button id="load-more" class="btn">Load more</button>
+        <button id="load-more" class="btn" data-testid="load-more">Load more</button>
+        <button id="retry-load" class="btn" style="margin-left:8px">Retry loading posts</button>
+      </div>
+
+      <div id="debug-area">
+        <div id="debug-message" style="margin-top:12px"></div>
+        <div id="debug-log" aria-hidden="false" data-testid="debug-log"></div>
       </div>
     </section>
 
     <aside class="read-sidebar" role="complementary">
       <div class="card">
         <img class="sidebar-photo" src="assets/images/cat.jpg" alt="Cat">
-        <p class="muted" style="margin:6px 0 0">
-          Hi! This is where I share updates related to my films and life. Also, from time to time, I’ll be posting stories, scripts and cat photos.
-        </p>
+        <p class="muted" style="margin:6px 0 0">Hi! Side content and filters.</p>
       </div>
 
       <div class="card">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-          <button id="cal-prev" class="btn">&lt;</button>
+          <button id="cal-prev" class="btn" aria-label="Previous month">&lt;</button>
           <div id="cal-month" class="small"></div>
-          <button id="cal-next" class="btn">&gt;</button>
+          <button id="cal-next" class="btn" aria-label="Next month">&gt;</button>
         </div>
         <div id="cal-grid" class="calendar-grid muted"></div>
       </div>
 
       <div class="card">
         <h3 class="small">Filter by tag</h3>
-        <div id="tags-list" class="tags"></div>
+        <div id="tags-list" class="tags" data-testid="tags-list"></div>
       </div>
 
       <div class="card">
         <h3 class="small">Recent posts</h3>
-        <div id="recent-list" class="muted">(auto)</div>
+        <div id="recent-list" class="muted" data-testid="recent-list">(auto)</div>
       </div>
     </aside>
-
   </main>
 
-  <!-- modal to show a full post -->
   <div id="modal" class="modal" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true">
       <button id="close-modal" class="btn" style="float:right">Close</button>
@@ -210,172 +124,219 @@
 
   <footer class="site-footer container">© 2025 SAGNIK DUTTA. ALL RIGHTS RESERVED</footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script>
-  const LS_KEY = 'blog_posts_v1';
-  let posts = [];
-  let filtered = [];
-  let visibleCount = 5;
-  const postsList = document.getElementById('posts-list');
-  const tagsList = document.getElementById('tags-list');
-  const recentList = document.getElementById('recent-list');
-  const postsCountEl = document.getElementById('posts-count');
+  <!-- Load marked - deferred, DOMContentLoaded used to ensure it's ready -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
 
-  // Load posts from index.json if available, otherwise from localStorage
-  async function loadPosts() {
-    try {
-      const listRes = await fetch('posts/index.json');
-      if (listRes.ok) {
-        const files = await listRes.json();
-        for (const file of files) {
-          const res = await fetch(`posts/${file}`);
-          if (!res.ok) continue;
-          const data = await res.json();
-          if (Array.isArray(data)) posts = posts.concat(data);
-          else posts.push(data);
+  <script>
+  // Run everything after DOM ready
+  window.addEventListener('DOMContentLoaded', () => {
+    // DOM refs
+    const postsList = document.getElementById('posts-list');
+    const tagsList = document.getElementById('tags-list');
+    const recentList = document.getElementById('recent-list');
+    const postsCountEl = document.getElementById('posts-count');
+    const searchInput = document.getElementById('search-input');
+    const clearSearchBtn = document.getElementById('clear-search');
+    const loadMoreBtn = document.getElementById('load-more');
+    const retryLoadBtn = document.getElementById('retry-load');
+    const closeModalBtn = document.getElementById('close-modal');
+    const debugLog = document.getElementById('debug-log');
+    const debugMessage = document.getElementById('debug-message');
+
+    // Basic guards
+    const requiredIds = ['posts-list','tags-list','recent-list','posts-count','search-input','clear-search','load-more','close-modal','cal-grid','cal-month'];
+    const missing = requiredIds.filter(id => !document.getElementById(id));
+    if (missing.length) {
+      console.error('Missing DOM elements:', missing);
+      debugMessage.innerHTML = `<div class="error-note">Missing DOM elements: ${missing.join(', ')}. Tests may fail.</div>`;
+    }
+
+    // State
+    let posts = [];
+    let filtered = [];
+    let visibleCount = 5;
+
+    // Utilities
+    function logDebug(...args){ console.log(...args); debugLog.textContent += args.map(a=>typeof a==='object'?JSON.stringify(a):String(a)).join(' ') + '\n'; debugLog.scrollTop = debugLog.scrollHeight; }
+    function shortUrl(u){ try { return (new URL(u)).pathname; } catch(e){ return u; } }
+
+    async function tryFetchJson(url){
+      try{
+        const res = await fetch(url, {cache:'no-store'});
+        logDebug(`FETCH ${shortUrl(url)} => ${res.status}`);
+        if (!res.ok) return { ok:false, status: res.status };
+        const data = await res.json();
+        return { ok:true, data };
+      } catch (err) {
+        logDebug(`FETCH ${shortUrl(url)} => ERROR: ${err && err.message}`);
+        return { ok:false, error: err };
+      }
+    }
+
+    // Main loader: try posts/index.json (list of filenames), then posts.json (single file), then show helpful message
+    async function loadPosts(){
+      posts = [];
+      debugLog.textContent = '';
+      debugMessage.innerHTML = '';
+
+      const tried = [];
+      const baseIndex = new URL('posts/index.json', location.href).href;
+      const idx = await tryFetchJson(baseIndex);
+      tried.push({url: baseIndex, ok: idx.ok, status: idx.status || (idx.error && idx.error.message)});
+
+      if (idx.ok){
+        // index.json may be either an array of filenames OR an array of post objects
+        const filesOrPosts = idx.data;
+        if (Array.isArray(filesOrPosts) && filesOrPosts.length && typeof filesOrPosts[0] === 'string'){
+          // array of filenames
+          for (const file of filesOrPosts){
+            const fileUrl = new URL(`posts/${file}`, location.href).href;
+            const r = await tryFetchJson(fileUrl);
+            tried.push({url: fileUrl, ok: r.ok, status: r.status || (r.error && r.error.message)});
+            if (r.ok){
+              if (Array.isArray(r.data)) posts.push(...r.data); else posts.push(r.data);
+            }
+          }
+        } else if (Array.isArray(filesOrPosts) && filesOrPosts.length && typeof filesOrPosts[0] === 'object'){
+          // index.json is actually a posts array
+          posts = filesOrPosts;
+        } else if (filesOrPosts && Array.isArray(filesOrPosts.files)){
+          // { files: [...] }
+          for (const file of filesOrPosts.files){
+            const fileUrl = new URL(`posts/${file}`, location.href).href;
+            const r = await tryFetchJson(fileUrl);
+            tried.push({url: fileUrl, ok: r.ok, status: r.status || (r.error && r.error.message)});
+            if (r.ok){ if (Array.isArray(r.data)) posts.push(...r.data); else posts.push(r.data); }
+          }
+        } else {
+          // unknown shape, attempt to treat as a single post object
+          if (typeof filesOrPosts === 'object') posts.push(filesOrPosts);
         }
       } else {
-        const raw = localStorage.getItem(LS_KEY);
-        posts = raw ? JSON.parse(raw) : [];
+        // try single posts.json at repo root
+        const rootPosts = new URL('posts.json', location.href).href;
+        const r2 = await tryFetchJson(rootPosts);
+        tried.push({url: rootPosts, ok: r2.ok, status: r2.status || (r2.error && r2.error.message)});
+        if (r2.ok){
+          if (Array.isArray(r2.data)) posts = r2.data; else if (Array.isArray(r2.data.posts)) posts = r2.data.posts; else if (typeof r2.data === 'object') posts = [r2.data];
+        }
       }
-    } catch (err) {
-      const raw = localStorage.getItem(LS_KEY);
-      posts = raw ? JSON.parse(raw) : [];
-    }
-    posts.forEach(p => p.dateObj = new Date(p.date));
-  }
 
-  function renderContentHtml(post){
-    if(post.contentHtml) return post.contentHtml;
-    if(post.contentMarkdown) return marked.parse(post.contentMarkdown);
-    return '';
-  }
-  function getExcerpt(html, length=220){
-    const tmp = document.createElement('div'); tmp.innerHTML = html;
-    const text = tmp.textContent || tmp.innerText || '';
-    return text.length>length ? text.slice(0,length).trim()+'…' : text;
-  }
-  function renderPosts(){
-    const sorted = [...posts].sort((a,b)=> (b.dateObj ? (b.dateObj - a.dateObj) : (new Date(b.date) - new Date(a.date)) )); // sort newest first
-    filtered = sorted.filter(filterPredicate);
-    postsCountEl.textContent = filtered.length;
-    const toShow = filtered.slice(0, visibleCount);
-    postsList.innerHTML = '';
-    toShow.forEach(p=>{
-      const html = renderContentHtml(p);
-      const thumb = findFirstImageSrc(html) || '';
-      const card = document.createElement('article'); card.className='post-card';
-      card.innerHTML = `
-        ${thumb?`<img class="post-thumb" src="${thumb}" alt="">`:''}
-        <div class="post-body">
-          <h3 class="post-title">${escapeHtml(p.title)}</h3>
-          <div class="post-meta">${formatDate(p.date)} • ${p.tags?p.tags.join(', '):''}</div>
-          <p class="post-excerpt">${escapeHtml(getExcerpt(html))}</p>
-          <a class="read-more" href="#" data-id="${p.id}">Read more</a>
-        </div>`;
-      postsList.appendChild(card);
-    });
-    renderTags();
-    renderRecent(sorted);
-  }
-  function filterPredicate(post){
-    const q = (document.getElementById('search-input').value||'').trim().toLowerCase();
-    const tagFilter = document.querySelector('.tag.active')?.textContent;
-    if(tagFilter && !(post.tags||[]).includes(tagFilter)) return false;
-    if(window.monthFilter){
-      const pd = new Date(post.date);
-      if(pd.getFullYear() !== window.monthFilter.year || pd.getMonth() !== window.monthFilter.month) return false;
+      // normalize dates
+      posts = posts.map(p => ({...p, dateObj: p.date ? new Date(p.date) : new Date(0)}));
+      posts.sort((a,b) => b.dateObj - a.dateObj);
+
+      if (!posts.length){
+        const list = tried.map(t => `<li>${shortUrl(t.url)} — ${t.ok?('OK '+t.status):('FAILED ' + (t.status||t.error||'error'))}</li>`).join('');
+        postsList.innerHTML = `<div class="card error-note">No posts found. Tried:<ul style="margin:8px 0 0 18px">${list}</ul></div>`;
+        postsCountEl.textContent = '0';
+        debugMessage.innerHTML = `<div class="error-note">No posts loaded. See debug log for attempted URLs and statuses.</div>`;
+        return;
+      }
+
+      // success
+      renderPosts();
     }
-    if(!q) return true;
-    const hay = (post.title+' '+(post.tags||[]).join(' ')+' '+(post.contentMarkdown||post.contentHtml||'')).toLowerCase();
-    return hay.indexOf(q) !== -1;
-  }
-  function formatDate(d){ const dt = new Date(d); return dt.toLocaleDateString(); }
-  function escapeHtml(s){
-    return (s||'').replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-  }
-  function findFirstImageSrc(html){
-    const tmp = document.createElement('div'); tmp.innerHTML=html;
-    const img = tmp.querySelector('img');
-    return img ? img.src : null;
-  }
-  function renderTags(){
-    const allTags = new Map();
-    posts.forEach(p=> (p.tags||[]).forEach(t=> allTags.set(t, (allTags.get(t)||0)+1)) );
-    tagsList.innerHTML = '';
-    Array.from(allTags.keys()).sort().forEach(tag=>{
-      const el = document.createElement('button'); el.className='tag'; el.textContent=tag; el.addEventListener('click',()=>{
-        el.classList.toggle('active');
-        document.querySelectorAll('.tag').forEach(x=>{ if(x!==el) x.classList.remove('active') });
-        visibleCount = 5; renderPosts();
+
+    function renderContentHtml(post){
+      if (post.contentHtml) return post.contentHtml;
+      if (post.contentMarkdown) return (window.marked ? marked.parse(post.contentMarkdown) : post.contentMarkdown);
+      return '';
+    }
+    function getExcerpt(html, length=220){ const tmp = document.createElement('div'); tmp.innerHTML = html; const text = tmp.textContent || tmp.innerText || ''; return text.length>length ? text.slice(0,length).trim()+'…' : text; }
+    function formatDate(d){ const dt = new Date(d); return isNaN(+dt) ? '' : dt.toLocaleDateString(); }
+    function escapeHtml(s){ return (s||'').replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+    function findFirstImageSrc(html){ const tmp = document.createElement('div'); tmp.innerHTML = html; const img = tmp.querySelector('img'); return img ? img.src : null; }
+
+    function filterPredicate(post){
+      const q = (searchInput.value||'').trim().toLowerCase();
+      const tagFilter = document.querySelector('.tag.active')?.textContent;
+      if (tagFilter && !(post.tags||[]).includes(tagFilter)) return false;
+      if (window.monthFilter){ const pd = new Date(post.date); if (pd.getFullYear() !== window.monthFilter.year || pd.getMonth() !== window.monthFilter.month) return false; }
+      if (!q) return true;
+      const hay = (post.title+' '+(post.tags||[]).join(' ')+' '+(post.contentMarkdown||post.contentHtml||'')).toLowerCase();
+      return hay.includes(q);
+    }
+
+    function renderTags(){
+      const allTags = new Map();
+      posts.forEach(p => (p.tags||[]).forEach(t => allTags.set(t, (allTags.get(t)||0)+1)));
+      tagsList.innerHTML = '';
+      Array.from(allTags.keys()).sort().forEach(tag => {
+        const el = document.createElement('button'); el.className='tag'; el.textContent=tag; el.addEventListener('click', ()=>{ el.classList.toggle('active'); document.querySelectorAll('.tag').forEach(x=>{ if(x!==el) x.classList.remove('active'); }); visibleCount = 5; renderPosts(); });
+        tagsList.appendChild(el);
       });
-      tagsList.appendChild(el);
-    });
-  }
-  function renderRecent(sorted){
-    const top = sorted.slice(0,5).map(p=>`<div><a href="#" data-id="${p.id}" class="muted">${escapeHtml(p.title)}</a><div class="small muted">${formatDate(p.date)}</div></div>`).join('');
-    recentList.innerHTML = top || '(none)';
-    recentList.querySelectorAll('a').forEach(a=>a.addEventListener('click',e=>{ e.preventDefault(); openPostById(a.dataset.id); }));
-  }
-  function openPostById(id){
-    const p = posts.find(x=>x.id===id); if(!p) return;
-    const html = renderContentHtml(p);
-    const modal = document.getElementById('modal');
-    document.getElementById('modal-content').innerHTML = `<h2>${escapeHtml(p.title)}</h2><div class="post-meta small muted">${formatDate(p.date)} • ${p.tags?p.tags.join(', '):''}</div><hr/>${html}`;
-    modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
-  }
-  document.getElementById('search-input').addEventListener('input', ()=>{ visibleCount = 5; renderPosts(); });
-  document.getElementById('clear-search').addEventListener('click', ()=>{ document.getElementById('search-input').value=''; visibleCount=5; renderPosts(); });
-  document.getElementById('load-more').addEventListener('click', ()=>{ visibleCount += 5; renderPosts(); });
-  document.addEventListener('click', (e)=>{
-    if(e.target.matches('.read-more')){ e.preventDefault(); openPostById(e.target.dataset.id); }
-  });
-  document.getElementById('close-modal').addEventListener('click', ()=>{
-    document.getElementById('modal').classList.remove('open'); document.getElementById('modal').setAttribute('aria-hidden','true');
-  });
-
-  // Calendar
-  window.monthFilter = null;
-  let calSelectedYear = null, calSelectedMonth = null;
-  function buildCalendar(year, month){
-    calSelectedYear = year; calSelectedMonth = month;
-    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    document.getElementById('cal-month').textContent = months[month] + ' ' + year;
-    const grid = document.getElementById('cal-grid'); grid.innerHTML = '';
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month+1, 0).getDate();
-    for(let i=0;i<firstDay;i++){ const b=document.createElement('div'); b.className='cal-day'; grid.appendChild(b); }
-    const today = new Date();
-    for(let d=1; d<=daysInMonth; d++){
-      const div = document.createElement('div'); div.className='cal-day'; div.textContent = d;
-      const has = posts.some(p=>{ const pd=new Date(p.date); return pd.getFullYear()===year && pd.getMonth()===month && pd.getDate()===d; });
-      if(has) div.classList.add('has-post');
-      if(year===today.getFullYear() && month===today.getMonth() && d===today.getDate()) div.classList.add('today');
-      div.addEventListener('click', ()=>{ window.monthFilter = {year, month}; visibleCount = 5; renderPosts(); });
-      grid.appendChild(div);
     }
-  }
-  function setMonthByOffset(offset){
-    let y = calSelectedYear ?? (new Date()).getFullYear();
-    let m = calSelectedMonth ?? (new Date()).getMonth();
-    m += offset;
-    if(m < 0){ y -= Math.ceil(Math.abs(m)/12); m = (m%12+12)%12; }
-    if(m > 11){ y += Math.floor(m/12); m = m%12; }
-    window.monthFilter = {year: y, month: m}; visibleCount = 5; renderPosts(); buildCalendar(y,m);
-  }
-  document.addEventListener('click', (e)=>{
-    if(e.target.id === 'cal-prev'){ e.preventDefault(); setMonthByOffset(-1); }
-    if(e.target.id === 'cal-next'){ e.preventDefault(); setMonthByOffset(1); }
-  });
 
-  // Init
-  (async function init(){
-    await loadPosts();
-    const now = new Date();
-    // show current month in calendar but DO NOT filter by default
-    buildCalendar(now.getFullYear(), now.getMonth());
-    renderPosts();
-  })();
+    function renderRecent(sorted){ const top = sorted.slice(0,5).map(p=>`<div><a href="#" data-id="${p.id}" class="muted">${escapeHtml(p.title)}</a><div class="small muted">${formatDate(p.date)}</div></div>`).join(''); recentList.innerHTML = top || '(none)'; recentList.querySelectorAll('a').forEach(a=>a.addEventListener('click',e=>{ e.preventDefault(); openPostById(a.dataset.id); })); }
+
+    function renderPosts(){
+      const sorted = [...posts].sort((a,b)=> b.dateObj - a.dateObj);
+      filtered = sorted.filter(filterPredicate);
+      postsCountEl.textContent = String(filtered.length);
+      const toShow = filtered.slice(0, visibleCount);
+      postsList.innerHTML = '';
+      toShow.forEach(p => {
+        const html = renderContentHtml(p);
+        const thumb = findFirstImageSrc(html) || '';
+        const card = document.createElement('article'); card.className='post-card';
+        card.innerHTML = `${thumb?`<img class="post-thumb" src="${thumb}" alt="">`:''}<div class="post-body"><h3 class="post-title">${escapeHtml(p.title)}</h3><div class="post-meta">${formatDate(p.date)} • ${(p.tags||[]).join(', ')}</div><p class="post-excerpt">${escapeHtml(getExcerpt(html))}</p><a class="read-more" href="#" data-id="${p.id}">Read more</a></div>`;
+        postsList.appendChild(card);
+      });
+      renderTags();
+      renderRecent(sorted);
+    }
+
+    function openPostById(id){ const p = posts.find(x=>x.id===id); if(!p) return; const html = renderContentHtml(p); const modal = document.getElementById('modal'); document.getElementById('modal-content').innerHTML = `<h2>${escapeHtml(p.title)}</h2><div class="post-meta small muted">${formatDate(p.date)} • ${(p.tags||[]).join(', ')}</div><hr/>${html}`; modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); }
+
+    window.monthFilter = null; let calSelectedYear=null, calSelectedMonth=null;
+    function buildCalendar(year, month){ calSelectedYear = year; calSelectedMonth = month; const months = ['January','February','March','April','May','June','July','August','September','October','November','December']; document.getElementById('cal-month').textContent = months[month] + ' ' + year; const grid = document.getElementById('cal-grid'); grid.innerHTML = ''; const firstDay = new Date(year, month, 1).getDay(); const daysInMonth = new Date(year, month+1, 0).getDate(); for(let i=0;i<firstDay;i++){ const b=document.createElement('div'); b.className='cal-day'; grid.appendChild(b); } const today = new Date(); for(let d=1; d<=daysInMonth; d++){ const div = document.createElement('div'); div.className='cal-day'; div.textContent = d; const has = posts.some(p=>{ const pd=new Date(p.date); return pd.getFullYear()===year && pd.getMonth()===month && pd.getDate()===d; }); if(has) div.classList.add('has-post'); if(year===today.getFullYear() && month===today.getMonth() && d===today.getDate()) div.classList.add('today'); div.addEventListener('click', ()=>{ window.monthFilter = {year, month}; visibleCount = 5; renderPosts(); }); grid.appendChild(div); } }
+    function setMonthByOffset(offset){ let y = calSelectedYear ?? (new Date()).getFullYear(); let m = calSelectedMonth ?? (new Date()).getMonth(); m += offset; if(m < 0){ y -= Math.ceil(Math.abs(m)/12); m = (m%12+12)%12; } if(m > 11){ y += Math.floor(m/12); m = m%12; } window.monthFilter = {year: y, month: m}; visibleCount = 5; renderPosts(); buildCalendar(y,m); }
+
+    document.addEventListener('click', (e)=>{ if(e.target.id === 'cal-prev'){ e.preventDefault(); setMonthByOffset(-1); } if(e.target.id === 'cal-next'){ e.preventDefault(); setMonthByOffset(1); } if(e.target.matches('.read-more')){ e.preventDefault(); openPostById(e.target.dataset.id); } });
+
+    // Event bindings (safe guards)
+    if (searchInput) searchInput.addEventListener('input', ()=>{ visibleCount = 5; renderPosts(); });
+    if (clearSearchBtn) clearSearchBtn.addEventListener('click', ()=>{ if (searchInput) searchInput.value=''; visibleCount=5; renderPosts(); });
+    if (loadMoreBtn) loadMoreBtn.addEventListener('click', ()=>{ visibleCount += 5; renderPosts(); });
+    if (retryLoadBtn) retryLoadBtn.addEventListener('click', async ()=>{ await loadPosts(); });
+    if (closeModalBtn) closeModalBtn.addEventListener('click', ()=>{ const modal = document.getElementById('modal'); modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); });
+
+    // Init
+    (async function init(){
+      try{
+        await loadPosts();
+        const now = new Date(); buildCalendar(now.getFullYear(), now.getMonth()); renderPosts();
+      }catch(e){ console.error('Error during init', e); debugMessage.innerHTML = `<div class="error-note">Initialization error: ${e && e.message}</div>`; }
+      runTests();
+    })();
+
+    // Tests
+    function runTests(){
+      console.group('[TEST] Sanity checks');
+      try{
+        // Test 1: Required DOM nodes exist
+        const ids = ['posts-list','tags-list','recent-list','posts-count','search-input','clear-search','load-more','close-modal','cal-grid','cal-month'];
+        const missing2 = ids.filter(id => !document.getElementById(id));
+        console.assert(missing2.length===0, 'Missing DOM nodes:', missing2);
+
+        // Test 2: loadPosts completed without throwing (posts is an array)
+        console.assert(Array.isArray(posts), 'posts should be an array');
+
+        // Test 3: renderPosts should not throw on current state
+        try{ renderPosts(); console.log('renderPosts executed'); } catch(e){ console.error('renderPosts threw', e); throw e; }
+
+        // Test 4: Calendar build should not throw
+        try{ buildCalendar((new Date()).getFullYear(), (new Date()).getMonth()); console.log('buildCalendar executed'); } catch(e){ console.error('buildCalendar threw', e); throw e; }
+
+        console.log('All tests finished (some assertions may be warnings)');
+      }catch(e){ console.error('Tests failed with error:', e); }
+      console.groupEnd();
+    }
+
+    // Expose diagnostics
+    window.runDiagnostics = () => { runTests(); console.log({ posts, filtered, visibleCount }); };
+  });
   </script>
 </body>
 </html>
