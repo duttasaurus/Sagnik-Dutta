@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The First Step</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* -- Right-column text tweaks only (keeps everything else unchanged) */
+    :root{
+      --muted-text: #bfc9c8;
+      --heading: #ffffff;
+    }
+    body {
+      background-color: #242E2C;
+      color: var(--heading);
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    /* preserve original header/footer styles (unchanged) */
+    .site-header {
+      border-bottom: none !important;
+      box-shadow: none !important;
+      background: transparent !important;
+      margin-top: 20px;
+    }
+    .site-header .container {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    a { color: #ffffff; }
+    .main-nav a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-left: 1rem;
+    }
+    .brand {
+      margin: 0;
+      line-height: 1;
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: #ffffff;
+      text-align: left;
+    }
+    .main-nav {
+      text-align: right;
+    }
+
+    /* --- THE ONLY CHANGES: right-column typography + narrow width + spacing --- */
+    /* top-align the grid cell for the right column */
+    main > div:nth-child(2) {
+      align-self: start;
+    }
+
+    .film-info h1 {
+      margin: 0 0 6px 0;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--heading);
+      letter-spacing: 0.2px;
+    }
+    .film-info > p:first-of-type {
+      margin: 0 0 12px 0;
+      color: var(--muted-text);
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+    .film-info h3,
+    .credits h3 {
+      margin: 14px 0 8px 0;
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--heading);
+    }
+
+    /* body copy style and column width */
+    .film-info p,
+    .credits p {
+      color: var(--muted-text);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin: 0 0 12px 0;
+      max-width: 360px; /* narrow right column like the mockup */
+    }
+
+    /* download link emphasis */
+    .credits a[download] {
+      color: #ffffff;
+      font-weight: 700;
+      text-decoration: underline;
+      display: inline-block;
+      margin-top: 6px;
+      margin-bottom: 10px;
+    }
+
+    /* credits as rows */
+    .credits ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 14px 0 0 0;
+      max-width: 360px;
+    }
+    .credits ul li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: var(--muted-text);
+      font-size: 0.92rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .credits ul li strong {
+      display: inline-block;
+      min-width: 120px;
+      color: var(--heading);
+      font-weight: 600;
+      margin-right: 12px;
+      font-size: 0.92rem;
+    }
+
+    /* ensure text blocks are allowed to be shifted (transforms) */
+    .film-info, .credits {
+      will-change: transform;
+    }
+
+    /* responsive safety: disable JS-driven alignment on stacked mobile layout */
+    @media (max-width: 980px) {
+      .film-info p, .credits p, .credits ul { max-width: 100%; }
+      .credits ul li { min-width: 0; display: block; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
+      .credits ul li strong { display:block; margin-bottom:6px; }
+    }
+
+    /* -----------------------
+       MOBILE-ONLY ADJUSTMENTS
+       - do NOT affect desktop layout
+       - reorder visually on small screens only
+       ----------------------- */
+    @media (max-width: 980px) {
+      html { -webkit-text-size-adjust: 100%; }
+
+      /* stack columns into a single column for mobile; keep desktop grid (inline styles) unchanged */
+      main {
+        display: flex !important;
+        flex-direction: column;
+        gap: 20px !important;
+        padding: 20px 12px !important;
+        max-width: 100% !important;
+      }
+
+      /* make the column wrappers transparent so their children can be reordered */
+      .left-col, .right-col {
+        display: contents;
+      }
+
+      /* Explicit visual order on mobile (keeps desktop order untouched) */
+      .film-hero { order: 1; }
+      /* title + brief + synopsis + about appear after hero (these are .film-info blocks in source order) */
+      .film-info { order: 2; }
+      .poster-art { order: 4; }
+      .credits { order: 5; }
+      .stills { order: 6; }
+      .festivals { order: 3; }
+      .main-logo { order: 7; }
+
+      /* Header stacks on mobile */
+      .site-header .container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 0 12px;
+      }
+      .brand {
+        font-size: 1.8rem;
+        text-align: center;
+      }
+      .main-nav {
+        text-align: center;
+      }
+      .main-nav a {
+        margin-left: 0.6rem;
+        font-size: 1rem;
+        padding: 6px 6px;
+        display: inline-block;
+      }
+
+      /* make iframe and images responsive on mobile (override inline widths/heights) */
+      .film-hero iframe,
+      .poster-art img,
+      .festivals img,
+      .gallery img {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100%;
+        object-fit: cover !important;
+        border-radius: 4px;
+      }
+
+      /* If browser supports aspect-ratio, keep proper video ratio */
+      .film-hero iframe {
+        aspect-ratio: 16/9;
+      }
+
+      /* festivals / poster / gallery should stack on mobile */
+      .festivals > div, .poster-art > div {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr !important;
+      }
+
+      .film-info, .credits {
+        margin-bottom: 24px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">Sagnik Dutta</h1>
+      <nav class="main-nav">
+        <a href="index.html">Films</a>
+        <a href="about.html">About me</a>
+        <a href="read.html">Read</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- KEEP THE LAYOUT & IMAGES EXACTLY AS BEFORE (no structural changes to desktop).
+       added harmless classes on the two wrapper divs so mobile-only CSS can use display:contents -->
+  <main style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr; gap: 40px; padding: 40px 20px;">
+    <!-- LEFT COLUMN -->
+    <div class="left-col">
+      <section class="film-hero" style="margin-bottom: 40px;">
+        <iframe width="800" height="450" src="https://www.youtube.com/embed/t7_zrE7i0og?si=NTf7dfuIADnvDRnu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <p style="font-size:0.9rem; margin-top:8px;">Watch the film here</p>
+      </section>
+
+      <section class="festivals" style="margin-bottom: 40px;">
+        <h3>Festivals</h3>
+        <div style="display:flex; gap:20px; flex-wrap:wrap;">
+          <img src="assets/images/tfs_festival1.png" alt="Festival 1" style="width:170px; height:auto;" />
+          <img src="assets/images/tfs_festival2.png" alt="Festival 2" style="width:170px; height:auto;" />
+          <img src="assets/images/tfs_festival3.png" alt="Festival 3" style="width:170px; height:auto;" />
+          <img src="assets/images/tfs_festival4.png" alt="Festival 4" style="width:170px; height:auto;" />
+        </div>
+      </section>
+
+      <section class="poster-art" style="margin-bottom: 40px;">
+        <h3>Poster Art</h3>
+        <div style="display:flex; gap:20px; flex-wrap:wrap;">
+          <img src="assets/images/firststep-poster.jpg" alt="The First Step poster 1" class="zoomable" style="width:400px; height:600px; object-fit:cover;" />
+        </div>
+      </section>
+
+      <section class="stills" style="margin-bottom: 40px;">
+        <h3>Stills</h3>
+        <div class="gallery" style="display:grid; grid-template-columns:repeat(2,1fr); gap:20px;">
+          <img src="assets/images/tfs_still1.jpg" alt="Film still 1" class="zoomable" style="width:100%; height:auto object-fit:cover;" />
+          <img src="assets/images/tfs_still2.jpg" alt="Film still 2" class="zoomable" style="width:100%; height:auto; object-fit:cover;" />
+          <img src="assets/images/tfs_still3.jpg" alt="Film still 3" class="zoomable" style="width:100%; height:auto; object-fit:cover;" />
+          <img src="assets/images/tfs_still4.jpg" alt="Film still 4" class="zoomable" style="width:100%; height:auto; object-fit:cover;" />
+        </div>
+      </section>
+    </div>
+
+    <!-- RIGHT COLUMN: ONLY TEXT SECTIONS -->
+    <div class="right-col">
+      <section class="film-info" style="margin-bottom: 200px;">
+        <h1>The First Step</h1>
+        <p>7 min, Hindi, 2024</p>
+      </section>
+
+      <section class="film-info" style="margin-bottom: 160px;">
+        <p>Synopsis</p>
+        <p>A socially isolated man's life is turned upside down when he comes across a social media influencer, who looks just like him.</p>
+      </section>
+
+      <section class="credits" style="margin-bottom: 100px;">
+        <h3>Credits</h3>
+        <p><strong>Cast:</strong> Tushar Chandra, Tanay Kumar, Rohit Ranjan<br>
+        <strong>Produced by:</strong> Rohit Ranjan, Tushar Chandra<br>
+       <strong>Written and Edited by:</strong> Rohit Ranjan, Tushar Chandra, Sagnik Dutta<br>
+        <strong>Asst. Director:</strong> Rohit Ranjan<br>
+       
+        <p>Directed by Sagnik Dutta</p>
+        
+
+        <ul>
+          <li><strong>Country:</strong> India</li>
+          <li><strong>Language:</strong> Hindi</li>
+          <li><strong>Subtitles:</strong> English</li>
+          <li><strong>Runtime:</strong> 7 mins</li>
+          <li><strong>Genre:</strong> Psychological Thriller</li>
+          <li><strong>Aspect Ratio:</strong> 16:9</li>
+          <li><strong>Format:</strong> 4K MP4</li>
+          <li><strong>Sound:</strong> Stereo</li>
+        </ul>
+      </section>
+
+      <section class="film-info" style="margin-bottom: 100px;">
+        <p>About the film</p>
+        <p>The First Step is a film about today, about the aspirations of a young man, and the effect of social media on his psyche. The film's structure is a reflection of his mental state. The story centered around the question, 'What would you do if you met yourself?'</p>
+
+        <p>Inspired by Christopher Nolan's 'Following', and the short stories of Satyajit Ray, 'The First Step' is a film designed to have a big impact within a small runtime.</p>
+      </section>
+    
+      <section class="main-logo" style="margin-top: 40px; text-align:center;">
+        <img src="assets/images/logo.png" alt="Studio Ronin logo" style="max-width:200px; height:auto;" />
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Sagnik Dutta. All Rights Reserved</p>
+    </div>
+  </footer>
+</body>
+</html>

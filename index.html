@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sagnik Dutta — Films</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    body {
+      background-color: #242E2C;
+      color: #ffffff;
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: #ffffff; text-decoration: none; }
+
+    /* Header */
+    .site-header {
+      border-bottom: none !important;
+      box-shadow: none !important;
+      background: transparent !important;
+    }
+    .site-header .container {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 1rem;
+    }
+    .brand {
+      margin: 0;
+      line-height: 1;
+      font-size: 2.6rem;
+      font-weight: 700;
+      text-align: left;
+    }
+
+    /* Navigation */
+    .main-nav {
+      text-align: right;
+    }
+    .main-nav a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-left: 1rem;
+    }
+
+    /* Hamburger toggle (hidden on desktop) */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.8rem;
+      cursor: pointer;
+      margin-left: 1rem;
+    }
+
+    /* Films grid — max 3 per row */
+    .films-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      align-items: start;
+      padding: 1rem;
+      max-width: 1100px; /* 3 cards with gaps */
+      margin: 0 auto;
+    }
+    .film-card a { text-decoration: none; color: inherit; }
+    .film-card .thumb {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      border-radius: 4px;
+      background: transparent;
+    }
+    .film-card .thumb-wrapper {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .film-card h2 { text-align: left; }
+
+    /* Footer */
+    .site-footer {
+      border-top: none !important;
+      margin-top: 40px;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* Tablet (2 per row) */
+    @media (max-width: 1024px) {
+      .films-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 750px;
+      }
+    }
+
+    /* Mobile adjustments (1 per row) */
+    @media (max-width: 768px) {
+      .site-header .container {
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .main-nav {
+        display: none;
+        width: 100%;
+        text-align: left;
+        margin-top: 0.5rem;
+      }
+      .main-nav a {
+        display: block;
+        margin: 0.5rem 0;
+      }
+      .main-nav.active {
+        display: block;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .films-grid {
+        grid-template-columns: 1fr;
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">Sagnik Dutta</h1>
+      <button class="menu-toggle" aria-label="Toggle Menu">☰</button>
+      <nav class="main-nav">
+        <a href="index.html">Films</a>
+        <a href="about.html">About me</a>
+        <a href="read.html">Read</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container films-grid">
+    <section class="film-card">
+      <a href="acts-of-kindness.html">
+        <div class="thumb-wrapper">
+          <img class="thumb" src="assets/images/aok-poster.jpg" alt="Acts of Kindness poster">
+        </div>
+        <h2>Acts of Kindness</h2>
+        <p>15 min · Bengali · 2025</p>
+      </a>
+    </section>
+
+    <section class="film-card">
+      <a href="the-first-step.html">
+        <div class="thumb-wrapper">
+          <img class="thumb" src="assets/images/firststep-poster.jpg" alt="The First Step poster">
+        </div>
+        <h2>The First Step</h2>
+        <p>7 min · Hindi · 2024</p>
+      </a>
+    </section>
+
+    <section class="film-card">
+      <a href="visionary.html">
+        <div class="thumb-wrapper">
+          <img class="thumb" src="assets/images/visionary-poster.jpg" alt="Visionary poster">
+        </div>
+        <h2>Visionary</h2>
+        <p>27 min · Hindi & English · 2024</p>
+      </a>
+    </section>
+
+    <section class="film-card">
+      <a href="ode-to-my-beloved.html">
+        <div class="thumb-wrapper">
+          <img class="thumb" src="assets/images/ode-poster.jpg" alt="Ode to my beloved poster">
+        </div>
+        <h2>Ode to my beloved</h2>
+        <p>2 min · Bengali · 2021</p>
+      </a>
+    </section>
+
+    <section class="film-card">
+      <a href="run-in.html">
+        <div class="thumb-wrapper">
+          <img class="thumb" src="assets/images/runin-poster.jpg" alt="Run-in poster">
+        </div>
+        <h2>Run-in</h2>
+        <p>2 min · Bengali · 2022</p>
+      </a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 SAGNIK DUTTA. ALL RIGHTS RESERVED</p>
+  </footer>
+
+  <script>
+    document.querySelector(".menu-toggle").addEventListener("click", () => {
+      document.querySelector(".main-nav").classList.toggle("active");
+    });
+  </script>
+</body>
+</html>

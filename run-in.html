@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Run-in</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* -- Right-column text tweaks only (keeps everything else unchanged) */
+    :root{
+      --muted-text: #bfc9c8;
+      --heading: #ffffff;
+    }
+    body {
+      background-color: #242E2C;
+      color: var(--heading);
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    /* preserve original header/footer styles (unchanged) */
+    .site-header {
+      border-bottom: none !important;
+      box-shadow: none !important;
+      background: transparent !important;
+      margin-top: 20px;
+    }
+    .site-header .container {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    a { color: #ffffff; }
+    .main-nav a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-left: 1rem;
+    }
+    .brand {
+      margin: 0;
+      line-height: 1;
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: #ffffff;
+      text-align: left;
+    }
+    .main-nav {
+      text-align: right;
+    }
+
+    /* --- THE ONLY CHANGES: right-column typography + narrow width + spacing --- */
+    /* top-align the grid cell for the right column */
+    main > div:nth-child(2) {
+      align-self: start;
+    }
+
+    .film-info h1 {
+      margin: 0 0 6px 0;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--heading);
+      letter-spacing: 0.2px;
+    }
+    .film-info > p:first-of-type {
+      margin: 0 0 12px 0;
+      color: var(--muted-text);
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+    .film-info h3,
+    .credits h3 {
+      margin: 14px 0 8px 0;
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--heading);
+    }
+
+    /* body copy style and column width */
+    .film-info p,
+    .credits p {
+      color: var(--muted-text);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin: 0 0 12px 0;
+      max-width: 360px; /* narrow right column like the mockup */
+    }
+
+    /* download link emphasis */
+    .credits a[download] {
+      color: #ffffff;
+      font-weight: 700;
+      text-decoration: underline;
+      display: inline-block;
+      margin-top: 6px;
+      margin-bottom: 10px;
+    }
+
+    /* credits as rows */
+    .credits ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 14px 0 0 0;
+      max-width: 360px;
+    }
+    .credits ul li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: var(--muted-text);
+      font-size: 0.92rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .credits ul li strong {
+      display: inline-block;
+      min-width: 120px;
+      color: var(--heading);
+      font-weight: 600;
+      margin-right: 12px;
+      font-size: 0.92rem;
+    }
+
+    /* ensure text blocks are allowed to be shifted (transforms) */
+    .film-info, .director-statement {
+      will-change: transform;
+    }
+
+    /* -----------------------
+       MOBILE-ONLY ADJUSTMENTS
+       - these override inline widths/heights on small screens
+       - DO NOT affect desktop layout
+       ----------------------- */
+    @media (max-width: 980px) {
+      html { -webkit-text-size-adjust: 100%; }
+
+      /* stack the two columns, reduce padding and gap for phones;
+         desktop inline grid styles remain untouched. */
+      main {
+        display: flex !important;
+        flex-direction: column;
+        gap: 20px !important;
+        padding: 20px 12px !important;
+        max-width: 100% !important;
+      }
+
+      /* allow children of the column wrappers to become direct children visually */
+      .left-col, .right-col {
+        display: contents;
+      }
+
+      /* visual mobile order:
+         1. hero, 2. title + brief + synopsis (.film-info), 3. credits, 4. logo */
+      .film-hero { order: 1; }
+      .film-info { order: 2; }
+      .credits { order: 3; }
+      .main-logo { order: 4; }
+
+      /* header stacks vertically on mobile (preserves desktop on larger screens) */
+      .site-header .container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 0 12px;
+      }
+      .brand {
+        font-size: 1.8rem;
+        text-align: center;
+      }
+      .main-nav {
+        text-align: center;
+      }
+      .main-nav a {
+        margin-left: 0.6rem;
+        font-size: 1rem;
+        padding: 6px 6px;
+        display: inline-block;
+      }
+
+      /* make iframe and images responsive on mobile (override inline widths/heights) */
+      .film-hero iframe,
+      .poster-art img,
+      .gallery img {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100%;
+        object-fit: cover !important;
+        border-radius: 4px;
+      }
+
+      /* preserve video aspect ratio if supported */
+      .film-hero iframe {
+        aspect-ratio: 16/9;
+      }
+
+      /* tighten up text block widths on mobile */
+      .film-info p, .credits p, .credits ul { max-width: 100%; }
+      .credits ul li { min-width: 0; display: block; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
+      .credits ul li strong { display:block; margin-bottom:6px; }
+
+      .film-info, .credits {
+        margin-bottom: 20px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">Sagnik Dutta</h1>
+      <nav class="main-nav">
+        <a href="index.html">Films</a>
+        <a href="about.html">About me</a>
+        <a href="read.html">Read</a>
+      </nav>
+    </div>
+  </header>
+
+  <main style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr; gap: 40px; padding: 40px 20px;">
+    <!-- LEFT COLUMN -->
+    <div class="left-col">
+      <section class="film-hero" style="margin-bottom: 40px;">
+        <iframe width="800" height="450" src="https://www.youtube.com/embed/tPRQkqVknV4?si=h-JVlVoxWfYeNaQT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <p style="font-size:0.9rem; margin-top:8px;">Watch the film here</p>
+      </section>
+    </div>
+
+    <!-- RIGHT COLUMN: ONLY TEXT SECTIONS -->
+    <div class="right-col">
+      <section class="film-info" style="margin-bottom: 80px;">
+        <h1>Run-in</h1>
+        <p>2 min, Bengali and Hindi, 2021</p>
+      </section>
+
+      <section class="film-info" style="margin-bottom: 80px;">
+        <p>Synopsis</p>
+        <p>
+A single take film about a young couple in a car who have a run-in with the police. All is not what is seems.</p>
+      </section>
+
+      <section class="credits">
+        <h3>Credits</h3>
+        <p><strong>Cast:</strong> Jayanta Pramanik, Nivedita Ghoshal, 
+Nikhil Sehgal, Rumpa Pramanik and Sarthak Pramanik<br>
+                <strong>Asst.:</strong> Srijan Chakrabarty<br>
+        
+        <p>Written, Shot &amp; Edited by Sagnik Dutta</p>
+      </section>
+
+      
+      <section class="main-logo" style="margin-top: 40px; text-align:center;">
+        <img src="assets/images/logo.png" alt="Studio Ronin logo" style="max-width:200px; height:auto;" />
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Sagnik Dutta. All Rights Reserved</p>
+    </div>
+  </footer>
+</body>
+</html>

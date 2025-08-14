@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Private Admin — Blog</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+body { background: #242E2C; color: #fff; font-family: system-ui, sans-serif; margin: 0; padding: 20px; }
+label { display: block; margin-top: 10px; }
+input, textarea { width: 100%; padding: 8px; margin-top: 4px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); background: transparent; color: #fff; }
+button { padding: 8px 12px; margin-top: 10px; border-radius: 6px; background: rgba(255,255,255,0.1); border: none; color: #fff; cursor: pointer; }
+</style>
+</head>
+<body>
+<h1>Private Blog Admin</h1>
+<p><strong>Note:</strong> This page creates a JSON file for each post. Move that file into your <code>/posts</code> folder and list it in the <code>files</code> array in <code>read.html</code> to make it appear on your public blog.</p>
+
+<label>Title <input id="post-title" placeholder="My post title"></label>
+<label>Date <input id="post-date" type="date"></label>
+<label>Tags (comma separated) <input id="post-tags" placeholder="tag1, tag2"></label>
+<label>Content (Markdown supported) <textarea id="post-content" rows="8" placeholder="Write your post here"></textarea></label>
+<label>Upload images <input id="post-images" type="file" accept="image/*" multiple></label>
+<button id="save-post">Save post</button>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+const LS_KEY = 'blog_posts_v1';
+
+function uid(){return 'p_'+Math.random().toString(36).slice(2,9);}
+function fileToDataUrl(file){return new Promise((res,rej)=>{const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=rej; r.readAsDataURL(file);});}
+function saveToLocalStorage(posts){ localStorage.setItem(LS_KEY, JSON.stringify(posts)); }
+
+function downloadObjectAsJson(obj, filename){
+  const blob = new Blob([JSON.stringify(obj, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),5000);
+}
+
+async function updateIndexFile(newFilename){
+  try {
+    let index = [];
+    // Try to get existing index.json from /posts
+    const res = await fetch('posts/index.json');
+    if (res.ok) {
+      index = await res.json();
+    }
+    // Add new filename if not already there
+    if (!index.includes(newFilename)) {
+      index.push(newFilename);
+    }
+    // Download updated index.json
+    downloadObjectAsJson(index, 'index.json');
+  } catch (err) {
+    console.error("Could not update index.json automatically:", err);
+    // Create a new one with just this file
+    downloadObjectAsJson([newFilename], 'index.json');
+  }
+}
+
+document.getElementById('save-post').addEventListener('click', async ()=>{
+  let posts = JSON.parse(localStorage.getItem(LS_KEY) || '[]');
+
+  const title = document.getElementById('post-title').value.trim() || 'Untitled';
+  const dateVal = document.getElementById('post-date').value || (new Date()).toISOString().slice(0,10);
+  const tagsRaw = document.getElementById('post-tags').value.trim();
+  const tags = tagsRaw ? tagsRaw.split(',').map(t=>t.trim()).filter(Boolean) : [];
+  let md = document.getElementById('post-content').value || '';
+
+  const files = Array.from(document.getElementById('post-images').files || []);
+  if(files.length){
+    const dataurls = await Promise.all(files.map(f=>fileToDataUrl(f)));
+    md += '\n\n' + dataurls.map((d,i)=>`![image${i+1}](${d})`).join('\n\n');
+  }
+
+  const postId = uid();
+  const post = { id: postId, title, date: new Date(dateVal).toISOString(), tags, contentMarkdown: md };
+  posts.push(post);
+
+  // Save locally for preview
+  saveToLocalStorage(posts);
+
+  // Download post file
+  const postFilename = `${postId}.json`;
+  downloadObjectAsJson(post, postFilename);
+
+  // Update index.json
+  await updateIndexFile(postFilename);
+
+  alert(`✅ Post saved locally.\n\n📄 Two files were downloaded:\n- ${postFilename}\n- index.json\n\nMove both into your /posts folder and replace the old index.json.`);
+
+  // Reset form
+  document.getElementById('post-title').value = '';
+  document.getElementById('post-date').value = '';
+  document.getElementById('post-tags').value = '';
+  document.getElementById('post-content').value = '';
+  document.getElementById('post-images').value = '';
+});
+</script>
+
+</body>
+</html>
