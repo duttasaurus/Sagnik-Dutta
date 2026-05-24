@@ -138,11 +138,10 @@
 
       .film-hero { order: 1; }
       .film-info { order: 2; }
-      .poster-art { order: 4; }
+      .poster-art { order: 3; }
+      .trailer { order: 4; }
       .credits { order: 5; }
-      .stills { order: 6; }
-      .festivals { order: 3; }
-      .main-logo { order: 7; }
+      .main-logo { order: 6; }
 
       .site-header .container {
         flex-direction: column;
@@ -166,6 +165,7 @@
       }
 
       .film-hero iframe,
+		.trailer iframe,
       .poster-art img,
       .festivals img,
       .gallery img {
@@ -176,7 +176,8 @@
         border-radius: 4px;
       }
 
-      .film-hero iframe {
+      .film-hero iframe,
+		.trailer iframe {
         aspect-ratio: 16/9;
       }
 
